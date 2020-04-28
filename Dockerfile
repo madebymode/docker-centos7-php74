@@ -3,21 +3,18 @@ MAINTAINER madebymode
 
 RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 RUN rpm -Uvh https://repo.ius.io/ius-release-el7.rpm
-#php71u is archived
-RUN yum-config-manager --enable ius-archive
-
 # Update and install latest packages and prerequisites
 RUN yum update -y \
     && yum install -y --nogpgcheck --setopt=tsflags=nodocs \
-        php71u-cli \
-        php71u-common \
-        php71u-fpm \
-        php71u-gd \
-        php71u-mbstring \
-        php71u-mysqlnd \
-        php71u-xml \
-        php71u-json \
-        php71u-intl \
+        php74-cli \
+        php74-common \
+        php74-fpm \
+        php74-gd \
+        php74-mbstring \
+        php74-mysqlnd \
+        php74-xml \
+        php74-json \
+        php74-intl \
     && yum clean all && yum history new
 
 RUN sed -e 's/127.0.0.1:9000/9000/' \
@@ -25,6 +22,9 @@ RUN sed -e 's/127.0.0.1:9000/9000/' \
         -e '/catch_workers_output/s/^;//' \
         -e '/error_log/d' \
         -i /etc/php-fpm.d/www.conf
+        
+#fixes  ERROR: Unable to create the PID file (/run/php-fpm/php-fpm.pid).: No such file or directory (2)        
+RUN sed -e '/^pid/s//;pid/' -i /etc/php-fpm.conf        
 
 CMD ["php-fpm", "-F"]
 
