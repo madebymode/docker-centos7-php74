@@ -15,6 +15,7 @@ RUN yum update -y \
         php74-xml \
         php74-json \
         php74-intl \
+        zip \
     && yum clean all && yum history new
 
 RUN sed -e 's/127.0.0.1:9000/9000/' \
