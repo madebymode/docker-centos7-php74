@@ -24,7 +24,9 @@ RUN sed -e 's/127.0.0.1:9000/9000/' \
         -i /etc/php-fpm.d/www.conf
         
 #fixes  ERROR: Unable to create the PID file (/run/php-fpm/php-fpm.pid).: No such file or directory (2)        
-RUN sed -e '/^pid/s//;pid/' -i /etc/php-fpm.conf        
+RUN sed -e '/^pid/s//;pid/' -i /etc/php-fpm.conf     
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 CMD ["php-fpm", "-F"]
 
