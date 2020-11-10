@@ -15,6 +15,7 @@ RUN yum update -y \
         php74-xml \
         php74-json \
         php74-intl \
+        zip \
         unzip \
     && yum clean all && yum history new
 
