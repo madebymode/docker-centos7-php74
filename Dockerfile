@@ -21,6 +21,8 @@ RUN yum update -y \
         zip \
         unzip \
         sudo \
+        rsync \
+        mysql \
     && yum clean all && yum history new
 
 RUN sed -e 's/127.0.0.1:9000/9000/' \
