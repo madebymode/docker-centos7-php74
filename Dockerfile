@@ -23,6 +23,7 @@ RUN yum update -y \
         sudo \
         rsync \
         mysql \
+        git \
     && yum clean all && yum history new
 
 RUN sed -e 's/127.0.0.1:9000/9000/' \
