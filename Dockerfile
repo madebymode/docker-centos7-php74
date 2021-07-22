@@ -17,6 +17,7 @@ RUN yum update -y \
         php74-intl \
         zip \
         unzip \
+        git \ 
     && yum clean all && yum history new
 
 RUN sed -e 's/127.0.0.1:9000/9000/' \
