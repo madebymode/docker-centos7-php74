@@ -30,6 +30,8 @@ RUN sed -e '/^pid/s//;pid/' -i /etc/php-fpm.conf
 
 #composer 1.10
 RUN curl -sS https://getcomposer.org/installer | php -- --version=1.10.17 --install-dir=/usr/local/bin --filename=composer
+#composer 2
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer2
 
 CMD ["php-fpm", "-F"]
 
