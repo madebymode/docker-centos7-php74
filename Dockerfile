@@ -18,6 +18,10 @@ RUN yum update -y \
         zip \
         unzip \
         git \ 
+        mysql \
+        rsync \ 
+        wget \
+        bash-completion \
     && yum clean all && yum history new
 
 RUN sed -e 's/127.0.0.1:9000/9000/' \
