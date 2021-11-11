@@ -20,7 +20,9 @@ RUN yum update -y \
         php74-intl \
         zip \
         unzip \
-        git \ 
+        sudo \
+        git \
+        mysql \
         rsync \ 
         wget \
         bash-completion \
