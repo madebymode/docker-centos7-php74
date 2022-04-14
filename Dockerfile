@@ -18,6 +18,7 @@ RUN yum update -y \
         php74-xml \
         php74-json \
         php74-intl \
+        php74-soap \
         zip \
         unzip \
         sudo \
