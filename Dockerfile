@@ -39,6 +39,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --version=1.10.17 --inst
 #composer 2
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer2
 
+COPY entrypoint.sh entrypoint.sh
+ENTRYPOINT ["./entrypoint.sh"]
+
 CMD ["php-fpm", "-F"]
 
 EXPOSE 9000
