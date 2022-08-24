@@ -18,6 +18,7 @@ RUN yum update -y \
         php74-xml \
         php74-json \
         php74-intl \
+        php74-soap \
         zip \
         unzip \
         sudo \
@@ -42,14 +43,20 @@ RUN sed -e '/^pid/s//;pid/' -i /etc/php-fpm.conf
 #fixes ERROR: failed to open error_log (/var/log/php-fpm/error.log): Permission denied (13), which running php-fpm as docker user
 RUN sed -e '/^error_log\s\=\s\/var\/log\/php-fpm\/error.log/s//error_log = \/dev\/stderr/' -i /etc/php-fpm.conf
 
+# Enable php fpm status page
+RUN echo "pm.status_path = /status" >> /etc/php-fpm.d/zz-status-page.conf
 
 #composer 1.10
 RUN curl -sS https://getcomposer.org/installer | php -- --version=1.10.17 --install-dir=/usr/local/bin --filename=composer
 #composer 2
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer2
 
-# Enable php fpm status page
-RUN echo "pm.status_path = /status" >> /etc/php-fpm.d/zz-status-page.conf
+#wp-cli
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \ 
+    && chmod +x wp-cli.phar \ 
+    && mv wp-cli.phar /usr/local/bin/wp
+
+CMD ["php-fpm", "-F"]
 
 #health check
 COPY ./php-fpm-healthcheck /usr/local/bin/
