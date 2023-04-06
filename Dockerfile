@@ -1,4 +1,4 @@
-FROM centos:7
+FROM centos:centos8
 MAINTAINER madebymode
 
 RUN rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
